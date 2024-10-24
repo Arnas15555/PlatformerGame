@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 public class GameOverOverlay {
 
     private Playing playing;
+
     public GameOverOverlay(Playing playing) {
         this.playing = playing;
     }
@@ -21,13 +22,13 @@ public class GameOverOverlay {
         g.setColor(Color.white);
         g.drawString("Game Over", Game.GAME_WIDTH / 2, 150);
         g.drawString("Press esc to enter Main Menu!", Game.GAME_WIDTH / 2, 300);
+
     }
 
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             playing.resetAll();
             Gamestate.state = Gamestate.MENU;
         }
     }
-
 }

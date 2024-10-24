@@ -8,8 +8,7 @@ import java.awt.image.BufferedImage;
 import static utilz.Constants.UI.URMButtons.URM_DEFAULT_SIZE;
 import static utilz.Constants.UI.URMButtons.URM_SIZE;
 
-public class UrmButton extends PauseButton{
-
+public class UrmButton extends PauseButton {
     private BufferedImage[] imgs;
     private int rowIndex, index;
     private boolean mouseOver, mousePressed;
@@ -23,9 +22,9 @@ public class UrmButton extends PauseButton{
     private void loadImgs() {
         BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.URM_BUTTONS);
         imgs = new BufferedImage[3];
-        for (int i = 0; i < imgs.length; i++) {
-            imgs[i] = temp.getSubimage(i*URM_DEFAULT_SIZE, rowIndex * URM_DEFAULT_SIZE, URM_DEFAULT_SIZE, URM_DEFAULT_SIZE);
-        }
+        for (int i = 0; i < imgs.length; i++)
+            imgs[i] = temp.getSubimage(i * URM_DEFAULT_SIZE, rowIndex * URM_DEFAULT_SIZE, URM_DEFAULT_SIZE, URM_DEFAULT_SIZE);
+
     }
 
     public void update() {
@@ -34,11 +33,11 @@ public class UrmButton extends PauseButton{
             index = 1;
         if (mousePressed)
             index = 2;
+
     }
 
     public void draw(Graphics g) {
-
-        g.drawImage(imgs[index], x, y,URM_SIZE, URM_SIZE, null);
+        g.drawImage(imgs[index], x, y, URM_SIZE, URM_SIZE, null);
     }
 
     public void resetBools() {
@@ -61,4 +60,5 @@ public class UrmButton extends PauseButton{
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
     }
+
 }

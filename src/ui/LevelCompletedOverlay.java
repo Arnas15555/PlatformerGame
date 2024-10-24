@@ -21,7 +21,6 @@ public class LevelCompletedOverlay {
         this.playing = playing;
         initImg();
         initButtons();
-
     }
 
     private void initButtons() {
@@ -41,6 +40,10 @@ public class LevelCompletedOverlay {
     }
 
     public void draw(Graphics g) {
+        // Added after youtube upload
+        g.setColor(new Color(0, 0, 0, 200));
+        g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+
         g.drawImage(img, bgX, bgY, bgW, bgH, null);
         next.draw(g);
         menu.draw(g);
@@ -52,7 +55,7 @@ public class LevelCompletedOverlay {
     }
 
     private boolean isIn(UrmButton b, MouseEvent e) {
-        return b.getBounds().contains(e.getX(),e.getY());
+        return b.getBounds().contains(e.getX(), e.getY());
     }
 
     public void mouseMoved(MouseEvent e) {
@@ -67,12 +70,13 @@ public class LevelCompletedOverlay {
 
     public void mouseReleased(MouseEvent e) {
         if (isIn(menu, e)) {
-            if (menu.isMousePressed())
-                System.out.println("menu");
-        }else if (isIn(next, e)) {
+            if (menu.isMousePressed()) {
+                playing.resetAll();
+                Gamestate.state = Gamestate.MENU;
+            }
+        } else if (isIn(next, e))
             if (next.isMousePressed())
-                System.out.println("next");
-        }
+                playing.loadNextLevel();
 
         menu.resetBools();
         next.resetBools();
@@ -84,4 +88,5 @@ public class LevelCompletedOverlay {
         else if (isIn(next, e))
             next.setMousePressed(true);
     }
+
 }

@@ -6,6 +6,7 @@ import entities.Player;
 import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
+import utilz.LoadSave;
 
 public class Game implements Runnable {
 
@@ -48,40 +49,32 @@ public class Game implements Runnable {
     }
 
     public void update() {
-        switch(Gamestate.state) {
-            case PLAYING -> {
-                playing.update();
-                break;
-            }
-            case MENU -> {
+        switch (Gamestate.state) {
+            case MENU:
                 menu.update();
                 break;
-            }
-            case OPTIONS -> {
-
-            }
-            case QUIT -> {
-                System.exit(0);
-            }
-            default -> {
+            case PLAYING:
+                playing.update();
                 break;
-            }
+            case OPTIONS:
+            case QUIT:
+            default:
+                System.exit(0);
+                break;
+
         }
-     }
+    }
 
     public void render(Graphics g) {
-        switch(Gamestate.state) {
-            case PLAYING -> {
-                playing.draw(g);
-                break;
-            }
-            case MENU -> {
+        switch (Gamestate.state) {
+            case MENU:
                 menu.draw(g);
                 break;
-            }
-            default -> {
+            case PLAYING:
+                playing.draw(g);
                 break;
-            }
+            default:
+                break;
         }
     }
 
@@ -131,14 +124,14 @@ public class Game implements Runnable {
     }
 
     public void windowFocusLost() {
-        if(Gamestate.state == Gamestate.PLAYING) {
+        if (Gamestate.state == Gamestate.PLAYING)
             playing.getPlayer().resetDirBooleans();
-        }
     }
 
     public Menu getMenu() {
         return menu;
     }
+
     public Playing getPlaying() {
         return playing;
     }

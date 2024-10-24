@@ -11,7 +11,7 @@ public class SoundButton extends PauseButton {
     private BufferedImage[][] soundImgs;
     private boolean mouseOver, mousePressed;
     private boolean muted;
-    private int rowIndex, columnIndex;
+    private int rowIndex, colIndex;
 
     public SoundButton(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -20,13 +20,11 @@ public class SoundButton extends PauseButton {
     }
 
     private void loadSoundImgs() {
-
         BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SOUND_BUTTONS);
         soundImgs = new BufferedImage[2][3];
-        for(int j = 0; j < soundImgs.length; j++)
+        for (int j = 0; j < soundImgs.length; j++)
             for (int i = 0; i < soundImgs[j].length; i++)
-                soundImgs[j][i] = temp.getSubimage(i * SOUND_SIZE_DEFAULT,j * SOUND_SIZE_DEFAULT,SOUND_SIZE_DEFAULT, SOUND_SIZE_DEFAULT);
-
+                soundImgs[j][i] = temp.getSubimage(i * SOUND_SIZE_DEFAULT, j * SOUND_SIZE_DEFAULT, SOUND_SIZE_DEFAULT, SOUND_SIZE_DEFAULT);
     }
 
     public void update() {
@@ -35,11 +33,12 @@ public class SoundButton extends PauseButton {
         else
             rowIndex = 0;
 
-        columnIndex = 0;
+        colIndex = 0;
         if (mouseOver)
-            columnIndex = 1;
+            colIndex = 1;
         if (mousePressed)
-            columnIndex = 2;
+            colIndex = 2;
+
     }
 
     public void resetBools() {
@@ -48,7 +47,7 @@ public class SoundButton extends PauseButton {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(soundImgs[rowIndex][columnIndex], x, y, width, height, null);
+        g.drawImage(soundImgs[rowIndex][colIndex], x, y, width, height, null);
     }
 
     public boolean isMouseOver() {
@@ -74,4 +73,5 @@ public class SoundButton extends PauseButton {
     public void setMuted(boolean muted) {
         this.muted = muted;
     }
+
 }
